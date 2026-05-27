@@ -1,0 +1,958 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+// ===========================
+// CONTAINER & LAYOUT
+// ===========================
+
+.container {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #f3e5f5 0%, #fce4ec 100%);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 80px;
+}
+
+// ===========================
+// HEADER
+// ===========================
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 24px 30px;
+  background: linear-gradient(135deg, #ce93d8 0%, #ba68c8 100%);
+  box-shadow: 0 4px 15px rgba(206, 147, 216, 0.25);
+  z-index: 10;
+  flex-shrink: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.headerContent {
+  width: 100%;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logoPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(171, 71, 188, 0.15);
+  border-radius: 12px;
+  flex-shrink: 0;
+  color: #ab47bc;
+}
+
+.brandInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brandName {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #ecf0f1;
+  margin: 0;
+}
+
+.brandTagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #bdc3c7;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+// ===========================
+// MAIN AREA
+// ===========================
+
+.main {
+  flex: 1;
+  padding: 40px 24px 24px;
+  z-index: 10;
+  text-align: left;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  position: fixed;
+  top: 88px;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+  overflow-y: auto;
+
+  /* Hide visible scrollbar but keep scrolling functional */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+}
+
+// ===========================
+// PAGE HEADER
+// ===========================
+
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .pageHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.pageTitle {
+  font-size: 32px;
+  color: $text-dark;
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+}
+
+.pageSubtitle {
+  font-size: 16px;
+  color: $text-secondary;
+  margin: 0;
+  max-width: 660px;
+  line-height: 1.6;
+}
+
+// ===========================
+// BUTTONS BASE
+// ===========================
+
+.primaryBtn,
+.secondaryBtn,
+.deleteBtn,
+.linkBtn {
+  border: none;
+  border-radius: 16px;
+  padding: 14px 18px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.25s ease,
+              opacity 0.2s ease,
+              background 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.primaryBtn {
+  background: linear-gradient(135deg, #ce93d8, #ba68c8);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(206, 147, 216, 0.25);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(186, 104, 200, 0.35);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+.secondaryBtn {
+  background: rgba(255, 255, 255, 0.7);
+  color: $text-dark;
+  box-shadow: 0 4px 15px rgba(162, 142, 142, 0.1);
+  backdrop-filter: blur(6px);
+
+  &:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 20px rgba(162, 142, 142, 0.15);
+  }
+}
+
+.deleteBtn {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(238, 90, 36, 0.2);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(238, 90, 36, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.linkBtn {
+  background: transparent;
+  color: $primary-color;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: rgba(206, 147, 216, 0.08);
+    color: #ba68c8;
+  }
+}
+
+// ===========================
+// SECTION CARD — GLASSMORPHISM (no white frame)
+// ===========================
+
+.sectionCard {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 24px;
+}
+
+// ===========================
+// ERROR, LOADING, EMPTY
+// ===========================
+
+.errorBox {
+  background: rgba(253, 236, 234, 0.8);
+  backdrop-filter: blur(8px);
+  color: #842029;
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  border: 1px solid rgba(132, 32, 41, 0.1);
+  animation: fadeSlideIn 0.3s ease;
+}
+
+.loading {
+  color: $text-secondary;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.loadingSpinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(186, 104, 200, 0.2);
+  border-top-color: #ba68c8;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.emptyState {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 24px;
+  padding: 40px 26px;
+  text-align: center;
+  color: $text-secondary;
+  font-size: 16px;
+}
+
+// ===========================
+// TABLE
+// ===========================
+
+.tableWrapper {
+  overflow-x: auto;
+  margin-top: 16px;
+  border-radius: 20px;
+
+  /* Smooth scrolling for touch devices */
+  -webkit-overflow-scrolling: touch;
+}
+
+.listTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+.listTable th,
+.listTable td {
+  text-align: left;
+  padding: 16px 18px;
+  background: transparent;
+}
+
+.listTable th {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $text-secondary;
+  border-bottom: 1px solid rgba(186, 104, 200, 0.12);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.listTable td {
+  font-size: 15px;
+  color: $text-dark;
+}
+
+.tableRow {
+  transition: background 0.25s ease;
+
+  td {
+    position: relative;
+  }
+
+  &:hover td {
+    background: rgba(206, 147, 216, 0.06);
+  }
+
+  td:first-child {
+    border-radius: 16px 0 0 16px;
+  }
+
+  td:last-child {
+    border-radius: 0 16px 16px 0;
+  }
+}
+
+// ===========================
+// TOGGLE SWITCH
+// ===========================
+
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggleSwitch {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s ease;
+  outline: none;
+  flex-shrink: 0;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(186, 104, 200, 0.3);
+  }
+}
+
+.toggleActive {
+  background: linear-gradient(135deg, #43b581, #2ecc71);
+  box-shadow: 0 2px 10px rgba(46, 204, 113, 0.3);
+
+  .toggleKnob {
+    transform: translateX(22px);
+  }
+}
+
+.toggleInactive {
+  background: linear-gradient(135deg, #e74c3c 0%, #95a5a6 100%);
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.25);
+
+  .toggleKnob {
+    transform: translateX(2px);
+  }
+}
+
+.toggleKnob {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggleLabel {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: color 0.3s ease;
+}
+
+.toggleLabelActive {
+  color: #2ecc71;
+}
+
+.toggleLabelInactive {
+  color: #95a5a6;
+}
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.toggleStatusLabel {
+  font-size: 15px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.toggleStatusActive {
+  color: #2ecc71;
+}
+
+.toggleStatusInactive {
+  color: #e74c3c;
+}
+
+.fieldLabel {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: $text-dark;
+}
+
+// ===========================
+// STATUS BADGE (details page)
+// ===========================
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.statusBadge.active {
+  background: rgba(46, 204, 113, 0.15);
+  color: #27ae60;
+}
+
+.statusBadge.inactive {
+  background: rgba(231, 76, 60, 0.12);
+  color: #c0392b;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  .active & {
+    background: #2ecc71;
+    box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);
+  }
+
+  .inactive & {
+    background: #e74c3c;
+    box-shadow: 0 0 6px rgba(231, 76, 60, 0.4);
+  }
+}
+
+// ===========================
+// ACTION ICONS
+// ===========================
+
+.actionsCell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.iconBtnGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.iconBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(206, 147, 216, 0.08);
+  color: #8e6a96;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.25s ease,
+              color 0.25s ease,
+              box-shadow 0.25s ease;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 0;
+
+  &:hover {
+    transform: scale(1.15);
+    background: rgba(186, 104, 200, 0.15);
+    color: #9b59b6;
+    box-shadow: 0 4px 14px rgba(186, 104, 200, 0.2);
+
+    .tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.iconBtnDanger {
+  background: rgba(231, 76, 60, 0.08);
+  color: #c0392b;
+
+  &:hover {
+    background: rgba(231, 76, 60, 0.15);
+    color: #e74c3c;
+    box-shadow: 0 4px 14px rgba(231, 76, 60, 0.2);
+  }
+}
+
+.editIcon,
+.deleteIcon {
+  width: 18px;
+  height: 18px;
+  transition: color 0.25s ease;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  background: rgba(44, 62, 80, 0.9);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 5px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease,
+              visibility 0.2s ease,
+              transform 0.2s ease;
+  pointer-events: none;
+  z-index: 20;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid rgba(44, 62, 80, 0.9);
+  }
+}
+
+// ===========================
+// FORM ELEMENTS
+// ===========================
+
+.formGrid {
+  display: grid;
+  gap: 18px;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formRow label {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: $text-dark;
+}
+
+.textInput {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  padding: 18px 20px;
+  font-size: 16px;
+  color: $text-dark;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.25s ease,
+              box-shadow 0.25s ease,
+              background 0.25s ease;
+}
+
+.checkboxField {
+  width: auto;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.6);
+  padding: 10px;
+}
+
+.textInput:focus,
+.checkboxField:focus {
+  outline: none;
+  border-color: #ce93d8;
+  box-shadow: 0 0 0 3px rgba(206, 147, 216, 0.15);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.checkboxLabel {
+  font-size: 15px;
+  color: $text-dark;
+}
+
+.formActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+// ===========================
+// DETAILS VIEW
+// ===========================
+
+.detailsGrid {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.detailsItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 18px;
+  transition: background 0.25s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.6);
+  }
+}
+
+.detailsLabel {
+  color: $text-secondary;
+  font-size: 14px;
+}
+
+.detailsValue {
+  color: $text-dark;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: right;
+}
+
+// ===========================
+// CONFIRMATION MODAL
+// ===========================
+
+.confirmOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 50;
+  animation: fadeIn 0.25s ease;
+}
+
+.confirmModal {
+  width: min(100%, 420px);
+  border-radius: 24px;
+  padding: 32px 26px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+  animation: modalSlideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+}
+
+.confirmIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  margin-bottom: 16px;
+}
+
+.confirmTitle {
+  margin: 0 0 12px;
+  font-size: 22px;
+  color: $text-dark;
+}
+
+.confirmText {
+  margin: 0 0 24px;
+  color: $text-secondary;
+  line-height: 1.6;
+}
+
+.confirmActions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+// ===========================
+// ANIMATIONS
+// ===========================
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// ===========================
+// RESPONSIVE — Mobile (320px – 480px)
+// ===========================
+
+@media (max-width: 480px) {
+  .header {
+    padding: 16px 20px;
+  }
+
+  .logoPlaceholder {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brandName {
+    font-size: 20px;
+  }
+
+  .main {
+    top: 72px;
+    padding: 20px 16px 16px;
+    bottom: 72px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  .sectionCard {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .primaryBtn,
+  .secondaryBtn,
+  .deleteBtn {
+    padding: 12px 14px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+
+  .listTable th,
+  .listTable td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  .iconBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .toggleSwitch {
+    width: 42px;
+    height: 23px;
+  }
+
+  .toggleActive .toggleKnob {
+    transform: translateX(19px);
+  }
+
+  .toggleKnob {
+    width: 17px;
+    height: 17px;
+    top: 3px;
+  }
+
+  .toggleLabel {
+    font-size: 12px;
+  }
+
+  .formActions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .formActions .primaryBtn,
+  .formActions .secondaryBtn,
+  .formActions .deleteBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .detailsItem {
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 16px;
+  }
+
+  .detailsValue {
+    text-align: left;
+  }
+
+  .confirmModal {
+    padding: 24px 18px;
+  }
+}
+
+// ===========================
+// RESPONSIVE — Tablet (481px – 768px)
+// ===========================
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .pageTitle {
+    font-size: 28px;
+  }
+
+  .sectionCard {
+    padding: 20px;
+  }
+
+  .listTable th,
+  .listTable td {
+    padding: 14px 14px;
+  }
+
+  .formActions {
+    flex-wrap: wrap;
+  }
+}
+
+// ===========================
+// RESPONSIVE — Laptop (769px – 1024px)
+// ===========================
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .pageTitle {
+    font-size: 32px;
+  }
+
+  .listTable th,
+  .listTable td {
+    padding: 16px 18px;
+  }
+}
+
+// ===========================
+// RESPONSIVE — Desktop (above 1024px)
+// ===========================
+
+@media (min-width: 1025px) {
+  .listTable th,
+  .listTable td {
+    padding: 18px 22px;
+  }
+}
